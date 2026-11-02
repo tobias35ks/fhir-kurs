@@ -7,10 +7,23 @@
 
 ## Resources
 
+### CodeSystems
+
+* [Kontakttyp](CodeSystem-kontakttyp.md)
+
+### ValueSets
+
+* [Klass av vårdkontakt](ValueSet-education-encounter-class.md)
+* [Kontakttyp – ValueSet](ValueSet-kontakttyp-vs.md)
+
 ### Resource Profiles
 
-* [Min fina profil](StructureDefinition-EducationEncounter.md)
+* [Education Encounter](StructureDefinition-EducationEncounter.md)
 * [Education Patient](StructureDefinition-EducationPatient.md)
+
+### Extensions
+
+* [Skyddad identitet](StructureDefinition-SkyddadIdentitet.md)
 
 ### ImplementationGuides
 
@@ -18,4 +31,5 @@
 
 ### Examples
 
+* [encounter-tolvan-1 (Encounter)](Encounter-encounter-tolvan-1.md)
 * [patient-tolvan (Patient)](Patient-patient-tolvan.md)

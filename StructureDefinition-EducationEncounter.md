@@ -1,19 +1,22 @@
-# Min fina profil - FHIR-utbildning – (Kurs-IG) v0.1.0
+# Education Encounter - FHIR-utbildning – (Kurs-IG) v0.1.0
 
 * [**Table of Contents**](toc.md)
 * [**Artifacts Summary**](artifacts.md)
-* **Min fina profil**
+* **Education Encounter**
 
-## Resource Profile: Min fina profil 
+## Resource Profile: Education Encounter 
 
 | | |
 | :--- | :--- |
 | *Official URL*:http://example.org/fhir/education/kursig/StructureDefinition/EducationEncounter | *Version*:0.1.0 |
 | Draft as of 2026-11-02 | *Computable Name*:EducationEncounter |
 
+ 
+Profil för en vårdkontakt i FHIR-utbildningen. 
+
 **Användningar:**
 
-* Denna Profil används inte av några profiler i denna implementationsguide
+* Exempel för denna Profil: [Encounter/encounter-tolvan-1](Encounter-encounter-tolvan-1.md)
 
 Du kan också kontrollera [användningar i FHIR IG-statistiken](https://packages2.fhir.org/xig/fhir.education.kursig|current/StructureDefinition/EducationEncounter)
 
@@ -36,10 +39,11 @@ Other representations of profile: [CSV](StructureDefinition-EducationEncounter.c
   "url" : "http://example.org/fhir/education/kursig/StructureDefinition/EducationEncounter",
   "version" : "0.1.0",
   "name" : "EducationEncounter",
-  "title" : "Min fina profil",
+  "title" : "Education Encounter",
   "status" : "draft",
-  "date" : "2026-11-02T12:32:19+00:00",
+  "date" : "2026-11-02T12:50:08+00:00",
   "publisher" : "FHIR-utbildning",
+  "description" : "Profil för en vårdkontakt i FHIR-utbildningen.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -76,7 +80,46 @@ Other representations of profile: [CSV](StructureDefinition-EducationEncounter.c
   "differential" : {
     "element" : [{
       "id" : "Encounter",
-      "path" : "Encounter"
+      "path" : "Encounter",
+      "constraint" : [{
+        "key" : "edu-enc-1",
+        "severity" : "error",
+        "human" : "En avslutad vårdkontakt (status = finished) ska ha en sluttid (period.end).",
+        "expression" : "status = 'finished' implies period.end.exists()",
+        "source" : "http://example.org/fhir/education/kursig/StructureDefinition/EducationEncounter"
+      },
+      {
+        "key" : "edu-enc-2",
+        "severity" : "warning",
+        "human" : "Sluttiden bör inte ligga före starttiden.",
+        "expression" : "period.end.empty() or period.start <= period.end",
+        "source" : "http://example.org/fhir/education/kursig/StructureDefinition/EducationEncounter"
+      }]
+    },
+    {
+      "id" : "Encounter.status",
+      "path" : "Encounter.status",
+      "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.class",
+      "path" : "Encounter.class",
+      "mustSupport" : true,
+      "binding" : {
+        "strength" : "required",
+        "valueSet" : "http://example.org/fhir/education/kursig/ValueSet/education-encounter-class"
+      }
+    },
+    {
+      "id" : "Encounter.type",
+      "path" : "Encounter.type",
+      "min" : 1,
+      "max" : "1",
+      "mustSupport" : true,
+      "binding" : {
+        "strength" : "extensible",
+        "valueSet" : "http://example.org/fhir/education/kursig/ValueSet/kontakttyp-vs"
+      }
     },
     {
       "id" : "Encounter.subject",
@@ -87,6 +130,45 @@ Other representations of profile: [CSV](StructureDefinition-EducationEncounter.c
         "targetProfile" : ["http://example.org/fhir/education/kursig/StructureDefinition/EducationPatient"]
       }],
       "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.period",
+      "path" : "Encounter.period",
+      "min" : 1,
+      "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.period.start",
+      "path" : "Encounter.period.start",
+      "min" : 1,
+      "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.period.end",
+      "path" : "Encounter.period.end",
+      "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.reasonCode",
+      "path" : "Encounter.reasonCode",
+      "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.serviceProvider",
+      "path" : "Encounter.serviceProvider",
+      "min" : 1,
+      "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.serviceProvider.identifier",
+      "path" : "Encounter.serviceProvider.identifier",
+      "min" : 1,
+      "mustSupport" : true
+    },
+    {
+      "id" : "Encounter.serviceProvider.identifier.system",
+      "path" : "Encounter.serviceProvider.identifier.system",
+      "patternUri" : "urn:oid:1.2.752.29.4.19"
     }]
   }
 }

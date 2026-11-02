@@ -26,7 +26,14 @@ Startläget innehåller en enda profil, [EducationPatient](StructureDefinition-E
 
 Se alla artefakter under [Artefakter](artifacts.md). Kvalitetsrapporten från IG Publisher finns i [qa.html](qa.md).
 
-Ingen användning av extern IP (annan än från FHIR-specifikationen)
+Denna publication inkluderar IP som omfattas av följande uttalanden.
+
+* This material derives from the HL7 Terminology (THO). THO is copyright ©1989+ Health Level Seven International and is made available under the CC0 designation. For more licensing information see: [https://terminology.hl7.org/license.html](https://terminology.hl7.org/license.html)
+
+* [ActCode](http://terminology.hl7.org/7.5.0/CodeSystem-v3-ActCode.html): [EducationEncounter](StructureDefinition-EducationEncounter.md), [EducationEncounterClassVS](ValueSet-education-encounter-class.md) and [Encounter/encounter-tolvan-1](Encounter-encounter-tolvan-1.md)
+* [MaritalStatus](http://terminology.hl7.org/7.5.0/CodeSystem-v3-MaritalStatus.html): [EducationPatient](StructureDefinition-EducationPatient.md) and [Patient/patient-tolvan](Patient-patient-tolvan.md)
+* [NullFlavor](http://terminology.hl7.org/7.5.0/CodeSystem-v3-NullFlavor.html): [EducationPatient](StructureDefinition-EducationPatient.md)
+
 
 Detta är en R4 IG. Inga av funktionerna den använder har ändrats i R4B, så den kan användas som den är med R4B-system. Paket för både [R4 (fhir.education.kursig.r4)](package.r4.tgz) och [R4B (fhir.education.kursig.r4b)](package.r4b.tgz) är tillgängliga.
 
@@ -47,7 +54,7 @@ Detta är en R4 IG. Inga av funktionerna den använder har ändrats i R4B, så d
   "name" : "FhirEducationKursIG",
   "title" : "FHIR-utbildning – (Kurs-IG)",
   "status" : "draft",
-  "date" : "2026-11-02T12:32:19+00:00",
+  "date" : "2026-11-02T12:50:08+00:00",
   "publisher" : "FHIR-utbildning",
   "description" : "En liten Implementation Guide som byggs upp steg för steg under FHIR-utbildningen.",
   "jurisdiction" : [{
@@ -396,6 +403,38 @@ Detta är en R4 IG. Inga av funktionerna den använder har ändrats i R4B, så d
     "resource" : [{
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Encounter"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "Encounter-encounter-tolvan-1.html"
+      }],
+      "reference" : {
+        "reference" : "Encounter/encounter-tolvan-1"
+      },
+      "name" : "Besök på vårdcentral",
+      "description" : "Tolvan besöker vårdcentralen.",
+      "exampleCanonical" : "http://example.org/fhir/education/kursig/StructureDefinition/EducationEncounter"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "StructureDefinition-EducationEncounter.html"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/EducationEncounter"
+      },
+      "name" : "Education Encounter",
+      "description" : "Profil för en vårdkontakt i FHIR-utbildningen.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "StructureDefinition:resource"
       },
       {
@@ -412,16 +451,65 @@ Detta är en R4 IG. Inga av funktionerna den använder har ändrats i R4B, så d
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
+        "valueString" : "ValueSet"
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-EducationEncounter.html"
+        "valueUri" : "ValueSet-education-encounter-class.html"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/EducationEncounter"
+        "reference" : "ValueSet/education-encounter-class"
       },
-      "name" : "Min fina profil",
+      "name" : "Klass av vårdkontakt",
+      "description" : "Ett urval av koder ur HL7 v3 ActCode som får användas i Encounter.class.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "CodeSystem"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "CodeSystem-kontakttyp.html"
+      }],
+      "reference" : {
+        "reference" : "CodeSystem/kontakttyp"
+      },
+      "name" : "Kontakttyp",
+      "description" : "Typ av vårdkontakt (fiktivt kodsystem för utbildningen).",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "ValueSet"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "ValueSet-kontakttyp-vs.html"
+      }],
+      "reference" : {
+        "reference" : "ValueSet/kontakttyp-vs"
+      },
+      "name" : "Kontakttyp – ValueSet",
+      "description" : "Alla koder i kodsystemet Kontakttyp.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:extension"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "StructureDefinition-SkyddadIdentitet.html"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/SkyddadIdentitet"
+      },
+      "name" : "Skyddad identitet",
+      "description" : "Anger om patienten har skyddade personuppgifter (t.ex. sekretessmarkering eller skyddad folkbokföring).",
       "exampleBoolean" : false
     },
     {

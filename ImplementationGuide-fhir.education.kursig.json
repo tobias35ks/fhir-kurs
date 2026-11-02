@@ -10,7 +10,7 @@
   "name" : "FhirEducationKursIG",
   "title" : "FHIR-utbildning – (Kurs-IG)",
   "status" : "draft",
-  "date" : "2026-11-02T12:32:19+00:00",
+  "date" : "2026-11-02T12:50:08+00:00",
   "publisher" : "FHIR-utbildning",
   "description" : "En liten Implementation Guide som byggs upp steg för steg under FHIR-utbildningen.",
   "jurisdiction" : [{
@@ -359,6 +359,30 @@
     "resource" : [{
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Encounter"
+      }],
+      "reference" : {
+        "reference" : "Encounter/encounter-tolvan-1"
+      },
+      "name" : "Besök på vårdcentral",
+      "description" : "Tolvan besöker vårdcentralen.",
+      "exampleCanonical" : "http://example.org/fhir/education/kursig/StructureDefinition/EducationEncounter"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/EducationEncounter"
+      },
+      "name" : "Education Encounter",
+      "description" : "Profil för en vårdkontakt i FHIR-utbildningen.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
@@ -371,12 +395,49 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
+        "valueString" : "ValueSet"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/EducationEncounter"
+        "reference" : "ValueSet/education-encounter-class"
       },
-      "name" : "Min fina profil",
+      "name" : "Klass av vårdkontakt",
+      "description" : "Ett urval av koder ur HL7 v3 ActCode som får användas i Encounter.class.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "CodeSystem"
+      }],
+      "reference" : {
+        "reference" : "CodeSystem/kontakttyp"
+      },
+      "name" : "Kontakttyp",
+      "description" : "Typ av vårdkontakt (fiktivt kodsystem för utbildningen).",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "ValueSet"
+      }],
+      "reference" : {
+        "reference" : "ValueSet/kontakttyp-vs"
+      },
+      "name" : "Kontakttyp – ValueSet",
+      "description" : "Alla koder i kodsystemet Kontakttyp.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:extension"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/SkyddadIdentitet"
+      },
+      "name" : "Skyddad identitet",
+      "description" : "Anger om patienten har skyddade personuppgifter (t.ex. sekretessmarkering eller skyddad folkbokföring).",
       "exampleBoolean" : false
     },
     {
